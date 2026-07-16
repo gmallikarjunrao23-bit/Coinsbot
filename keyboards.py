@@ -27,12 +27,10 @@ def main_menu(is_admin: bool):
     return _kb(rows, "Choose an option below 👇")
 
 
-def category_menu(types):
-    """Dynamic store categories — one button per distinct content type
-    currently in the database. Admins can add ANY category name and it
-    will automatically appear here."""
+def category_menu(buttons):
+    """`buttons` is a list of ready-made labels (e.g. '📖 EBOOK') so the
+    caller can assign a smart icon per category."""
     rows = []
-    buttons = [f"📦 {t.upper()}" for t in types]
     for i in range(0, len(buttons), 2):
         rows.append(buttons[i:i + 2])
     if not rows:
