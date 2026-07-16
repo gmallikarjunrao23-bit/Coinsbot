@@ -26,16 +26,24 @@ DATABASE_URL = os.getenv("DATABASE_URL", "")
 OWNER_USERNAME = os.getenv("OWNER_USERNAME", "@DEVILHASHJ")
 CHANNEL_LINK = os.getenv("CHANNEL_LINK", "https://t.me/+cygM0ZXtfDA0Zjk1")
 
-FOOTER = f"\n\n👑 Owner: {OWNER_USERNAME}\n📢 Channel: {CHANNEL_LINK}"
+# Numeric channel ID used ONLY to verify membership for the mandatory
+# "join our channel" gate (e.g. -1001234567890). The bot must be an ADMIN
+# of this channel for membership checks to work. Get this ID by forwarding
+# any message from the channel to a bot like @userinfobot / @RawDataBot.
+# If left empty, the join-gate is disabled and the bot works normally.
+CHANNEL_ID = os.getenv("CHANNEL_ID", "").strip()
+
+FOOTER = f"\n\n👑 Owner: {OWNER_USERNAME}"
 
 # ---- Economy Settings ----
 REFERRAL_BONUS = 5          # coins given to both referrer & new user
 DAILY_BONUS_AMOUNT = 10     # coins given for daily bonus
 DAILY_BONUS_COOLDOWN_HOURS = 24
 
-# ---- Content Types ----
-CONTENT_TYPES = ["course", "file", "method"]
+# NOTE: Content categories are no longer restricted to a fixed list.
+# Admins can type ANY category name when adding content (e.g. "Ebook",
+# "Script", "Template", "Course", "Wallpaper Pack" — anything at all),
+# and the store automatically shows a button for every category in use.
 
 def is_admin(user_id: int) -> bool:
     return user_id in ADMIN_IDS
-
