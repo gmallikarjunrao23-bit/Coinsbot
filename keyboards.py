@@ -46,19 +46,12 @@ def admin_menu():
     rows = [
         ["📊 STATS", "📦 ADD CONTENT"],
         ["📋 MANAGE CONTENT", "🎫 GIFT CODES"],
-        ["💰 ADD COINS", "👥 USERS"],
-        ["📢 BROADCAST", "🚫 BAN"],
+        ["➕ ADD COINS", "➖ REMOVE COINS"],
+        ["👥 USERS", "📢 BROADCAST"],
+        ["🚫 BAN USER", "✅ UNBAN USER"],
         ["🔙 BACK TO MENU"],
     ]
     return _kb(rows, "Admin tools 👑")
-
-
-def giftcode_menu():
-    rows = [
-        ["🎫 SINGLE CODE", "📦 BULK CODES"],
-        ["🔙 BACK TO ADMIN"],
-    ]
-    return _kb(rows, "Generate a code 👇")
 
 
 def cancel_menu(placeholder="Type your input, or tap ❌ CANCEL"):
@@ -72,7 +65,7 @@ def confirm_menu(yes_text="✅ CONFIRM", no_text="❌ CANCEL"):
 
 
 def back_to_store():
-    return _kb([["🔙 BACK TO MENU"]], "Send /buy <id> to purchase")
+    return _kb([["🔙 BACK TO MENU"]], "Type the ID number to buy")
 
 
 def join_gate_menu():
