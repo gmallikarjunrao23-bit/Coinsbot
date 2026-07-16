@@ -21,19 +21,24 @@ def main_menu(is_admin: bool):
         ["🏪 STORE", "👤 PROFILE"],
         ["🎫 REDEEM", "👥 REFERRAL"],
         ["🎁 DAILY BONUS", "🏆 LEADERBOARD"],
-        ["📢 CHANNEL"],
     ]
     if is_admin:
         rows.append(["👑 ADMIN PANEL"])
     return _kb(rows, "Choose an option below 👇")
 
 
-def store_menu():
-    rows = [
-        ["📚 COURSES", "📁 FILES"],
-        ["🔧 METHODS", "🛒 MY PURCHASES"],
-        ["🔙 BACK TO MENU"],
-    ]
+def category_menu(types):
+    """Dynamic store categories — one button per distinct content type
+    currently in the database. Admins can add ANY category name and it
+    will automatically appear here."""
+    rows = []
+    buttons = [f"📦 {t.upper()}" for t in types]
+    for i in range(0, len(buttons), 2):
+        rows.append(buttons[i:i + 2])
+    if not rows:
+        rows.append(["😴 NO CATEGORIES YET"])
+    rows.append(["🛒 MY PURCHASES"])
+    rows.append(["🔙 BACK TO MENU"])
     return _kb(rows, "Pick a category 👇")
 
 
@@ -62,10 +67,14 @@ def cancel_menu(placeholder="Type your input, or tap ❌ CANCEL"):
 
 def confirm_menu(yes_text="✅ CONFIRM", no_text="❌ CANCEL"):
     """Generic yes/no confirmation keyboard — handy for anything that
-    should double-check before acting (e.g. a costly purchase, a
-    destructive admin action, or a broadcast about to go out)."""
+    should double-check before acting."""
     return _kb([[yes_text, no_text]], "Please confirm 👇")
 
 
 def back_to_store():
     return _kb([["🔙 BACK TO MENU"]], "Send /buy <id> to purchase")
+
+
+def join_gate_menu():
+    """Shown when a user hasn't joined the mandatory channel yet."""
+    return _kb([["✅ I'VE JOINED"]], "Tap once you've joined the channel")
